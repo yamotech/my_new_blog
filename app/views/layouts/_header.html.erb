@@ -14,12 +14,18 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/posts">トップページ</a></li>
-        <li><a href="/posts/new">新規投稿</a></li>
+        <li><%= link_to "トップページ", posts_path %></li>
+        <li><%= link_to "新規投稿", new_post_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/authors/sign_up">サインアップ</a></li>
-        <li><a href="/authors/sign_in">ログイン</a></li>
+        <% if author_signed_in? %>
+          <li><%= link_to "設定変更", edit_author_registration_path %></li>
+          <li><%= link_to "ログアウト", destroy_author_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "新規登録", new_author_registration_path %></li>
+          <li><%= link_to "ログイン", new_author_session_path %></li>
+        <% end %>
+      </ul>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
